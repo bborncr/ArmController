@@ -6,7 +6,7 @@ The control data is sent via serial port @ 38400 bps in the following format:
 
 `<servo>,<angle><newline>`
 
-Example: `0,90\n` sends a command to be parsed by an Arduino to set servo 0 to 90 degrees 
+Example: `0,90` sends a command to be parsed by an Arduino to set servo 0 to 90 degrees 
 
 ## Requirements
 - Processing version: 3.3.7
