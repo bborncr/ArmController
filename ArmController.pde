@@ -66,9 +66,9 @@ int Arm(float x, float y, float z, int g, float wa, int wr)
   //float Wris = abs(wa - Elbow - Shoulder) - 90;
   float Wris = abs(wa - Elbow - Shoulder);
   //slider1.setValue(z);
-  slider2.setValue(180-Shoulder);
-  slider3.setValue(Elbow);
-  slider4.setValue(180-Wris);
+  slider2.setValue(Shoulder);
+  slider3.setValue(180-Elbow);
+  slider4.setValue(Wris);
   //slider5.setValue(g);
   return 0;
 }

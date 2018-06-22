@@ -86,7 +86,7 @@ public void createGUI(){
   G4P.messagesEnabled(false);
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setCursor(ARROW);
-  surface.setTitle("Controlador Mini Brazo");
+  surface.setTitle("Controlador Brazo");
   slider1 = new GSlider(this, 320, 10, 200, 50, 20.0);
   slider1.setShowValue(true);
   slider1.setShowLimits(true);
