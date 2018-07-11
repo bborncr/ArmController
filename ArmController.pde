@@ -23,6 +23,12 @@ int playback_count = 0;
 long previousMillis = 0;
 long previousBlinkMillis = 0;
 long interval = 100;
+int val;
+
+String inputString = "";
+String idString = "";
+String commandString = "";
+boolean stringComplete = false;
 
 public void setup() {
   size(550, 500, JAVA2D);
@@ -42,10 +48,11 @@ public void setup() {
 public void draw() {
   background(255);
   image(crciberneticalogo, 20, 420, width/2, height/10 );
-
+  
+  parseCommand();
   updatePlayBack();
   updateAnimation();
-  
+
 }
 
 /* arm positioning routine utilizing inverse kinematics */
@@ -180,4 +187,18 @@ void saveCoordinates() {
   int g = slider5.getValueI();
   float w = slider6.getValueI();
   output.println(x + "," + y + "," + z + "," + g + "," + w + "," + 90);
+}
+
+void serialEvent(Serial p) {
+  while (p.available() > 0) {
+    // get the new byte:
+    char inChar = (char)p.read();
+    // add it to the inputString:
+    inputString += inChar;
+    // if the incoming character is a newline, set a flag
+    // so the main loop can do something about it:
+    if (inChar == '\n') {
+      stringComplete = true;
+    }
+  }
 }

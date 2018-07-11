@@ -159,6 +159,10 @@ public void createGUI(){
   slider6.setNumberFormat(G4P.INTEGER, 0);
   slider6.setOpaque(false);
   slider6.addEventHandler(this, "slider6_change1");
+  label4 = new GLabel(this, 75, 328, 174, 20);
+  label4.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label4.setText("Input");
+  label4.setOpaque(false);
 }
 
 // Variable declarations 
@@ -175,3 +179,4 @@ GLabel label1;
 GLabel label2; 
 GLabel label3; 
 GSlider slider6; 
+GLabel label4; 
