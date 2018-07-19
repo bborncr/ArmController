@@ -50,7 +50,7 @@ public void draw() {
   image(crciberneticalogo, 20, 420, width/2, height/10 );
   
   parseCommand();
-  updatePlayBack();
+  //updatePlayBack();
   updateAnimation();
 
 }
@@ -197,8 +197,9 @@ void serialEvent(Serial p) {
     inputString += inChar;
     // if the incoming character is a newline, set a flag
     // so the main loop can do something about it:
-    if (inChar == '\n') {
+    if (inChar == '\n' && inputString.length() > 3) {
       stringComplete = true;
+      //println(inputString.length());
     }
   }
 }

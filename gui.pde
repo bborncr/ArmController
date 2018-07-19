@@ -147,11 +147,11 @@ public void createGUI(){
   label1.setOpaque(false);
   label2 = new GLabel(this, 70, 290, 80, 20);
   label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label2.setText("x: 50");
+  label2.setText("x: 100");
   label2.setOpaque(false);
   label3 = new GLabel(this, 170, 290, 80, 20);
   label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label3.setText("y: 50");
+  label3.setText("y: 100");
   label3.setOpaque(false);
   slider6 = new GSlider(this, 320, 340, 200, 50, 20.0);
   slider6.setShowValue(true);
