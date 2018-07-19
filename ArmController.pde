@@ -50,7 +50,7 @@ public void draw() {
   image(crciberneticalogo, 20, 420, width/2, height/10 );
   
   parseCommand();
-  //updatePlayBack();
+  updatePlayBack();
   updateAnimation();
 
 }
@@ -173,7 +173,7 @@ int ArmPlayBack(float x, float y, float z, int g, float wa, int wr)
     return 1;
   float Wris = abs(wa - Elbow - Shoulder) - 90;
   slider1.setValue(z);
-  slider2.setValue(180-Shoulder);
+  slider2.setValue(Shoulder);
   slider3.setValue(180-Elbow);
   slider4.setValue(Wris);
   slider5.setValue(g);
