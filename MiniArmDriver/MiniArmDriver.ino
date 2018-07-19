@@ -1,3 +1,6 @@
+// Install the Adafruit_PWMServoDriver from the Arduino IDE Library Manager
+// Pin 11 is used as an example of sending data from the arduino to the Processing App
+
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <avr/pgmspace.h>
