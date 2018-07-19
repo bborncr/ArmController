@@ -8,8 +8,9 @@ The control data is sent via serial port @ 38400 bps in the following format:
 
 Example: `0,90` sends a command to be parsed by an Arduino to set servo 0 to 90 degrees
 
-**UPDATE** Now the processing can receive commands in the same format as above:
-`<number>,<value>`
+**UPDATE** Now the app can receive commands from the arduino in the same format as above:
+
+`<number>,<value><newline>`
 
 The data is parsed in the parseCommand() function
 
