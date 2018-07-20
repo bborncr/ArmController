@@ -101,7 +101,7 @@ public void createGUI(){
   slider2d1.setNumberFormat(G4P.INTEGER, 0);
   slider2d1.setOpaque(true);
   slider2d1.addEventHandler(this, "slider2d1_change1");
-  dropList1 = new GDropList(this, 120, 20, 170, 80, 3);
+  dropList1 = new GDropList(this, 122, 20, 170, 80, 3);
   dropList1.setItems(loadStrings("list_784376"), 0);
   dropList1.addEventHandler(this, "dropList1_click1");
   slider2 = new GSlider(this, 320, 70, 200, 50, 20.0);

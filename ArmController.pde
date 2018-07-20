@@ -29,30 +29,30 @@ String inputString = "";
 String idString = "";
 String commandString = "";
 boolean stringComplete = false;
+String nullPort[]={"Nulo"};
 
 public void setup() {
   size(550, 500, JAVA2D);
   createGUI();
   crciberneticalogo = loadImage("CRCibernetica509x81.png");
-  String portName = Serial.list()[Serial.list().length-1];
-  println("Port: " + portName);
-  myPort = new Serial(this, portName, 38400);
-  myPort.bufferUntil('\n');
-
-  dropList1.setItems(Serial.list(), Serial.list().length-1);
-  fileName = getDateTime();
-  output = createWriter("data/" + "positions" + fileName + ".csv");
-  output.println("x,y,z,g,wa,wr");
+  //String portName = Serial.list()[Serial.list().length-1];
+  //println("Port: " + portName);
+  //myPort = new Serial(this, portName, 38400);
+  //myPort.bufferUntil('\n');
+  //dropList1.setItems(Serial.list(), Serial.list().length-1);
+  dropList1.setItems(nullPort, 0);
+  //fileName = getDateTime();
+  //output = createWriter("data/" + "positions" + fileName + ".csv");
+  //output.println("x,y,z,g,wa,wr");
 }
 
 public void draw() {
   background(255);
   image(crciberneticalogo, 20, 420, width/2, height/10 );
-  
+
   parseCommand();
   updatePlayBack();
   updateAnimation();
-
 }
 
 /* arm positioning routine utilizing inverse kinematics */
@@ -81,24 +81,17 @@ int Arm(float x, float y, float z, int g, float wa, int wr)
 }
 
 void keyPressed() {
-  if (keyCode==16){//right shift
-    PLAYBACK = false;
-    playback_count = 0;
-    selected_file="normalstance.csv";
-    PLAYBACK=true;
-  }
-   if (keyCode==47){// forward slash
+  if (keyCode==47) {// forward slash
     PLAYBACK = false;
     playback_count = 0;
     selectedfilecount=selectedfilecount+1;
-    if(selectedfilecount>1){
+    if (selectedfilecount>1) {
       selectedfilecount=1;
     }
     selected_file=selectedfilecount+".csv";
     PLAYBACK=true;
- 
   }
-  
+
   if (keyCode==83) { // s to save coordinates to file
     println("Coordinates saved to file");
     float x = slider2d1.getValueXI();
@@ -138,8 +131,7 @@ void keyPressed() {
 void fileSelected(File selection) {
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
-  } 
-  else {
+  } else {
     println("User selected " + selection.getAbsolutePath());
     selected_file = selection.getAbsolutePath();
   }
