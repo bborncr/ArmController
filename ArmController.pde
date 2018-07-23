@@ -1,6 +1,10 @@
 // Need G4P library
 import g4p_controls.*;
 import processing.serial.*;
+// Shapes3D library
+import shapes3d.*;
+import shapes3d.animation.*;
+import shapes3d.utils.*;
 
 Serial myPort;
 String s="";
@@ -13,7 +17,6 @@ float rtod = 57.295779;
 PrintWriter output;
 
 String fileName;
-Table table;
 String selected_file;
 int selectedfilecount=0;
 
@@ -35,12 +38,12 @@ public void setup() {
   size(550, 500, JAVA2D);
   createGUI();
   crciberneticalogo = loadImage("CRCibernetica509x81.png");
-  //String portName = Serial.list()[Serial.list().length-1];
-  //println("Port: " + portName);
-  //myPort = new Serial(this, portName, 38400);
-  //myPort.bufferUntil('\n');
-  //dropList1.setItems(Serial.list(), Serial.list().length-1);
-  dropList1.setItems(nullPort, 0);
+  String portName = Serial.list()[Serial.list().length-1];
+  println("Port: " + portName);
+  myPort = new Serial(this, portName, 38400);
+  myPort.bufferUntil('\n');
+  dropList1.setItems(Serial.list(), Serial.list().length-1);
+  //dropList1.setItems(nullPort, 0);
   //fileName = getDateTime();
   //output = createWriter("data/" + "positions" + fileName + ".csv");
   //output.println("x,y,z,g,wa,wr");
@@ -76,7 +79,7 @@ int Arm(float x, float y, float z, int g, float wa, int wr)
   slider2.setValue(Shoulder);
   slider3.setValue(180-Elbow);
   slider4.setValue(Wris);
-  //slider5.setValue(g);
+  //slider5.setValue(g); // gripper is controller separately in this mode
   return 0;
 }
 
@@ -101,30 +104,34 @@ void keyPressed() {
     float w = slider6.getValueI();
     output.println(x + "," + y + "," + z + "," + g + "," + w + "," + 90);
   }
-  if (keyCode==88) {
-    println("Close file"); //x to save and close file
+  if (keyCode==88) { // x to save and close file
+    println("Close file");
     RECORD=false;
     output.flush(); // Writes the remaining data to the file
     output.close(); // Finishes the file
     //exit(); // Stops the program
   }
-  if (keyCode==80) {
-    println("Playback"); //p for playback
+  if (keyCode==80) { // p for playback
+    println("Playback");
     PLAYBACK = true;
   }
-  if (keyCode==78) { 
+  if (keyCode==78) { // n for new file (positions<datetime>.csv)
     fileName = getDateTime();
     output = createWriter("data/" + "positions" + fileName + ".csv");
     output.println("x,y,z,g,wa,wr");
-    println("New position file"); //n for new file
+    println("New position file");
   }
-  if (keyCode==79) {
-    println("Open File for Playback"); //o for open file for playback
+  if (keyCode==79) { // o for open file for playback
+    println("Open File for Playback");
     selectInput("Select a file to playback:", "fileSelected");
   }
-  if (keyCode==82) {
-    println("Record"); //r for record
+  if (keyCode==82) { // r for record
+    println("Record");
     RECORD = true;
+  }
+  if (keyCode==67) { // c to calculate bezier curves
+    println("Creating bezier curves");
+    calcCurves();
   }
 }
 
@@ -150,6 +157,7 @@ String getDateTime() {
   s = s + String.valueOf(min);
   return s;
 }
+
 int ArmPlayBack(float x, float y, float z, int g, float wa, int wr)
 {
   float M = sqrt((y*y)+(x*x));
@@ -163,7 +171,8 @@ int ArmPlayBack(float x, float y, float z, int g, float wa, int wr)
   Shoulder = Shoulder * rtod;
   while ( (int)Elbow <= 0 || (int)Shoulder <= 0)
     return 1;
-  float Wris = abs(wa - Elbow - Shoulder) - 90;
+  //float Wris = abs(wa - Elbow - Shoulder) - 90;
+  float Wris = abs(wa - Elbow - Shoulder);
   slider1.setValue(z);
   slider2.setValue(Shoulder);
   slider3.setValue(180-Elbow);

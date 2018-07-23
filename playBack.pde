@@ -1,4 +1,5 @@
 void updatePlayBack() {
+  Table table;
   long currentMillis = millis();
   if (PLAYBACK&&(currentMillis - previousMillis > interval)) {
     previousMillis = currentMillis;
